@@ -12,10 +12,11 @@ var apiController = require('./controllers/apiController');
 
 var port = process.env.PORT || 3000;
 
-app.use('/assets', express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
 
+// config folder has index.js -> getDbConnectionString, which returns the url to mLab DB...
 mongoose.connect(config.getDbConnectionString());
 
 // call the function that's returned by require
