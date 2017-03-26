@@ -8,6 +8,8 @@ var config = require('./config');
   // runs endpoint, connects to mongoose, use mongoose.create to add seed data
 var setupController = require('./controllers/setupController');
 
+var apiController = require('./controllers/apiController');
+
 var port = process.env.PORT || 3000;
 
 app.use('/assets', express.static(__dirname + '/public'));
@@ -15,6 +17,11 @@ app.use('/assets', express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 
 mongoose.connect(config.getDbConnectionString());
+
+// call the function that's returned by require
 setupController(app);
+
+// call the function that's returned by require (adds all of the route handlers, including middleware that parses http request)
+apiController(app);
 
 app.listen(port);
